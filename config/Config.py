@@ -359,7 +359,7 @@ class Config(object):
                     self.restore_tensorflow()
                 if self.test_link_prediction:
                     total = self.lib.getTestTotal()
-                    for times in range(total-58500):
+                    for times in range(total):
                         self.lib.getHeadBatch(self.test_h_addr, self.test_t_addr, self.test_r_addr)
                         res = self.test_step(self.test_h, self.test_t, self.test_r)
                         self.lib.testHead(res.__array_interface__['data'][0])

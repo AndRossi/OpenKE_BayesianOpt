@@ -41,7 +41,7 @@ def train_and_evaluate(batches_per_epoch=100, learning_rate=0.001, embedding_siz
     #Set the knowledge embedding model
     con.set_model(models.TransE)
     #Train the model.
-    #con.run()
+    con.run()
     #To test models after training needs "set_test_flag(True)".
     return con.test()
 
