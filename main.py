@@ -46,7 +46,7 @@ def train_and_evaluate(batches_per_epoch=100, learning_rate=0.001, embedding_siz
     #Initialize experimental settings.
     con.init()
     #Set the knowledge embedding model
-    con.set_model(models.TransE)
+    con.set_model(models.RESCAL)
     #Train the model.
     con.run()
     #To test models after training needs "set_test_flag(True)".
