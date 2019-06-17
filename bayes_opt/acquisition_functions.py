@@ -1,7 +1,6 @@
 
 import numpy as np
 from scipy.stats import norm
-from sklearn.metrics.pairwise import euclidean_distances
 from scipy import stats
 
 

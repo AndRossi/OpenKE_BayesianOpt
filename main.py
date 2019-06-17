@@ -6,6 +6,13 @@ import os
 os.environ['CUDA_VISIBLE_DEVICES']='7'
 #Input training files from benchmarks/FB15K/ folder.
 
+
+# batches_per_epoch: from 50 to 200 (int)
+# learning rate: from 0.1 to 0.0001 (real)
+# embedding_size: from 50 to 300 (int)
+# ent_neg_rate: from 1 to 10 (int)
+batches_per_epoch_range = []
+
 def train_and_evaluate(batches_per_epoch=100, learning_rate=0.001, embedding_size = 100, ent_neg_rate = 1):
     con = config.Config()
     # True: Input test files from the same folder.
