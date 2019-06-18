@@ -1,0 +1,8 @@
+res/*
+.idea
+__pycache__
+bayes_opt/__pycache__
+bayes_opt/sequentialBO/__pycache__
+bayes_opt/test_functions/__pycache__
+bayes_opt/utility/__pycache__
+models/__pycache__

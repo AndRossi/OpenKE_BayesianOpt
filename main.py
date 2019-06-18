@@ -3,7 +3,7 @@ import models
 import tensorflow as tf
 import numpy as np
 import os
-os.environ['CUDA_VISIBLE_DEVICES']='7'
+os.environ['CUDA_VISIBLE_DEVICES']='0'
 #Input training files from benchmarks/FB15K/ folder.
 
 
@@ -14,7 +14,7 @@ os.environ['CUDA_VISIBLE_DEVICES']='7'
 batches_per_epoch_range = []
 
 def train_and_evaluate(batches_per_epoch=100, learning_rate=0.001, embedding_size = 100, ent_neg_rate = 1):
-    print("############### STARTING MODEL TRAINING ##################")
+    print("\n\n############### STARTING MODEL TRAINING ##################")
     print("batches_per_epoch " + str(batches_per_epoch))
     print("learning_rate " + str(learning_rate))
     print("embedding_size " + str(embedding_size))
@@ -28,11 +28,11 @@ def train_and_evaluate(batches_per_epoch=100, learning_rate=0.001, embedding_siz
     con.set_test_link_prediction(True)
     con.set_test_triple_classification(False)
     con.set_work_threads(8)
-    con.set_train_times(10)
+    con.set_train_times(1000)
     con.set_nbatches(batches_per_epoch)
     con.set_alpha(learning_rate)
     con.set_margin(1.0)
-    con.set_bern(0)
+    con.set_bern(1)
     con.set_dimension(embedding_size)
     con.set_ent_neg_rate(ent_neg_rate)
     con.set_rel_neg_rate(0)
@@ -50,7 +50,9 @@ def train_and_evaluate(batches_per_epoch=100, learning_rate=0.001, embedding_siz
     #Train the model.
     con.run()
     #To test models after training needs "set_test_flag(True)".
-    return con.test()
+    result = con.test()
+    print("UTILITY SCORE: " + str(result))
+    return result
 
 train_and_evaluate()
 

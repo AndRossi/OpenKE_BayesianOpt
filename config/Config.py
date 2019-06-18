@@ -367,8 +367,8 @@ class Config(object):
                         self.lib.getTailBatch(self.test_h_addr, self.test_t_addr, self.test_r_addr)
                         res = self.test_step(self.test_h, self.test_t, self.test_r)
                         self.lib.testTail(res.__array_interface__['data'][0])
-                        if self.log_on and times%100==0:
-                            print(times)
+                        if self.log_on and times%1000==0:
+                            print("Tested triples: " + str(times))
                     return self.lib.test_link_prediction()
                 if self.test_triple_classification:
                     self.lib.getValidBatch(self.valid_pos_h_addr, self.valid_pos_t_addr, self.valid_pos_r_addr, self.valid_neg_h_addr, self.valid_neg_t_addr, self.valid_neg_r_addr)
