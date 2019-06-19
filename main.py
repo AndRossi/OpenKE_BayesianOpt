@@ -1,3 +1,6 @@
+import gc
+import shutil
+
 import config
 import models
 import tensorflow as tf
@@ -13,7 +16,7 @@ os.environ['CUDA_VISIBLE_DEVICES']='0'
 # ent_neg_rate: from 1 to 10 (int)
 batches_per_epoch_range = []
 
-def train_and_evaluate(batches_per_epoch=100, learning_rate=0.001, embedding_size = 100, ent_neg_rate = 1):
+def train_and_evaluate(batches_per_epoch=100, learning_rate=0.001, embedding_size = 100, ent_neg_rate = 1, clean_everything_afterwards=False):
     print("\n\n############### STARTING MODEL TRAINING ##################")
     print("batches_per_epoch " + str(batches_per_epoch))
     print("learning_rate " + str(learning_rate))
@@ -27,7 +30,7 @@ def train_and_evaluate(batches_per_epoch=100, learning_rate=0.001, embedding_siz
 
     con.set_test_link_prediction(True)
     con.set_test_triple_classification(False)
-    con.set_work_threads(8)
+    con.set_work_threads(6)
     con.set_train_times(1000)
     con.set_nbatches(batches_per_epoch)
     con.set_alpha(learning_rate)
@@ -51,7 +54,19 @@ def train_and_evaluate(batches_per_epoch=100, learning_rate=0.001, embedding_siz
     con.run()
     #To test models after training needs "set_test_flag(True)".
     result = con.test()
+
     print("UTILITY SCORE: " + str(result))
+
+    # clean everything
+    print("CLEANING...")
+    if clean_everything_afterwards:
+        shutil.rmtree("./res/model.vec.tf")
+        shutil.rmtree("./res/embedding.vec.json")
+        con.close();
+        con = None
+        gc.collect()
+    print("DONE...")
+
     return result
 
 train_and_evaluate()

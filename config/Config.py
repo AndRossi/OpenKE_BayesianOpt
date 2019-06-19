@@ -472,3 +472,8 @@ class Config(object):
             print("triple (%d,%d,%d) is correct" % (h, t, r))
         else:
             print("triple (%d,%d,%d) is wrong" % (h, t, r))
+
+    def close(self):
+        with self.sess.as_default():
+            tf.reset_default_graph()
+

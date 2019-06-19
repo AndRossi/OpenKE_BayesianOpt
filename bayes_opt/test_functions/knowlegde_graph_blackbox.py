@@ -68,7 +68,8 @@ class KnowledgeGraphBlackbox:
         utility = train_and_evaluate(batches_per_epoch=batches_per_epoch,
                                      learning_rate=learning_rate,
                                      embedding_size=embedding_size,
-                                     ent_neg_rate=ent_neg_rate)
+                                     ent_neg_rate=ent_neg_rate,
+                                     clean_everything_afterwards=True)
 
         return utility
   
